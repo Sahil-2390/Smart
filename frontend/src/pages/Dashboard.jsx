@@ -7,7 +7,7 @@ function Dashboard() {
   const [results, setResults] = useState([]);
   const [filter, setFilter] = useState('All');
   const [loading, setLoading] = useState(false);
-  const baseUrl = process.env.REACT_APP_API_URL;
+ 
 
   useEffect(() => {
     fetchResults();
@@ -15,7 +15,7 @@ function Dashboard() {
 
   const fetchResults = async () => {
     try {
-      const response = await axios.get(`${baseUrl}/api/leads`);
+      const response = await axios.get(`https://smart-xpsp.onrender.com/api/leads`);
       setResults(response.data);
     } catch (error) {
       console.error('Error fetching results:', error);
@@ -27,7 +27,7 @@ function Dashboard() {
     setLoading(true);
     try {
       const namesArray = names.split(',').map(name => name.trim()).filter(name => name);
-      const response = await axios.post(`${baseUrl}/api/leads`, { names: namesArray });
+      const response = await axios.post(`https://smart-xpsp.onrender.com/api/leads`, { names: namesArray });
       setResults(prev => [...response.data, ...prev]);
       setNames('');
     } catch (error) {
